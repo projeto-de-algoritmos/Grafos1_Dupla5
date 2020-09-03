@@ -1,5 +1,3 @@
-const Edge = require('./edge');
-
 class Node {
     constructor(props){
         this._edges = [];

@@ -13,10 +13,13 @@ class Graph {
     addEdge(origin, destination, weight){
         const [originNode] = this._nodes.filter((x) =>  x._label === origin );
         const [destNode] = this._nodes.filter((x) => x._label === destination );
-        console.log(originNode);
         originNode._edges.push(new Edge({
             weight,
             destination: destNode,
+        }));
+        destNode._edges.push(new Edge({
+            weight,
+            destination: originNode,
         }));
     }
 }
