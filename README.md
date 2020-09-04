@@ -14,10 +14,10 @@ Conteúdo da Disciplina: Grafos
 
 ## Sobre
 
-Essa aplicação consiste em retornar ao usuario o melhor caminho entre uma cidade e outra, de acordo com a distância e o tempo.
+Essa aplicação consiste em retornar ao usuario o melhor caminho entre uma região administrativa e outra, de acordo com a distância e o tempo e também com as regiões vizinhas. 
 
 ## Screenshots
----
+
 Adicione 3 ou mais screenshots do projeto em funcionamento.
 
 ## Instalação
@@ -32,4 +32,4 @@ Explique como usar seu projeto caso haja algum passo a passo após o comando de 
 
 ## Outros
 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
+Para esse projeto foi levado em consideração apenas a região como um todo sendo o nó, sem detalhamento das ruas. 
