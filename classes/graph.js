@@ -22,6 +22,19 @@ class Graph {
             destination: originNode,
         }));
     }
+
+    showGraph(){
+        // console.log(graph);
+        this._nodes.map(
+            (node) => console.log(
+                node._label + ' -' + node._edges.map(
+                    (edge) => {
+                        return ' ' + edge._destination._label 
+                    }
+                )
+            )
+        );
+    }
 }
 
 module.exports = Graph;
