@@ -1,14 +1,6 @@
 const Graph = require('./classes/graph');
 
-function showGraph(graph){
-    // console.log(graph);
-    graph._nodes.map(
-        (node) => console.log(node._label + ' -' + node._edges.map(
-            (edge) => {
-                return ' ' + edge._destination._label
-            }))
-    );
-}
+
 
 function calcDistance(graph){    
     let keys = [ '_distance', '_time' ]; // key[0] = distance, key[1] = time
@@ -88,5 +80,5 @@ graph.addEdge("Lago Paranoa", "Jardim Botanico", {_distance: 10, _time: 20});
 
 
 
-showGraph(graph);
+graph.showGraph();
 calcDistance(graph);
