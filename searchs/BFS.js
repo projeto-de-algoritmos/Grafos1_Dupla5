@@ -10,36 +10,62 @@
 //                mark vertex v as visited
 //                Enqueue(S,v)
 
-function bfs(graph, root) {
-    let nodesLen = {};
-    
-    //for (var i = 0; i < graph.length; i++) {
-    //  nodesLen[i] = Infinity;
-    //}
-    nodesLen[root] = 0; 
-    
-    let queue = [root]; 
-    let nodeIndex; 
-    
-    while (queue.length != 0) {
-      
-      nodeIndex = queue.shift();
-      
-      let currentNode = graph[nodeIndex];  // nós conectados com o nó corente
-      let neighborIndex = []; 
-      let index = currentNode.indexOf(1); 
+const Graph = require("../classes/graph");
+const routes = require("../data/citiesRoutes");
+const cities = require('../data/cities');
 
-      while (index != -1) {
-        neighborIndex.push(index); 
-        index = currentNode.indexOf(1, index + 1); 
-      }
-      
-      for (let j = 0; j < neighborIndex.length; j++) {
-        if (nodesLen[neighborIndex[j]] == Infinity) {
-          nodesLen[neighborIndex[j]] = nodesLen[nodeIndex] + 1;
-          queue.push(neighborIndex[j]); 
+
+function Enqueue(queue, element) {
+  queue.push(element); 
+}
+function Dequeue(queue) {
+  return queue.shift(); 
+}
+
+
+// BFS(graph, 'taguatingua');
+function BFS(graph, root) {
+  let treeGraph = new Graph;
+  cities.forEach(city => {
+    treeGraph.addNode(city[0], city[1], city[2]);
+  });
+  
+  let citiesQueue = [root]; // fila de nos
+  let visitedCities = [root];
+  let currentCity; 
+  
+  while (citiesQueue.length != 0) {
+    
+    currentCity = Dequeue(citiesQueue);
+    // console.log(currentCity);
+
+    let currentNode = graph._nodes.find(node =>  // nos conectados com o no corente
+      node._label === currentCity
+    );  
+    // console.log(currentNode);
+
+    let neighborCities = []; 
+
+    currentNode._edges.map(edge => {
+      neighborCities.push(edge._destination._label); 
+    });
+    // console.log(currentCity);
+
+    for (const neighborCity of neighborCities) {
+      // console.log(neighborCity);      
+      if(visitedCities.find(city => // se a cidade vizinha nao tiver sido visitada
+        city === neighborCity) === undefined) {
+          Enqueue(visitedCities, neighborCity);
+          Enqueue(citiesQueue, neighborCity);
+          let temp = routes.find(route => // buscar nos dados qual caminho vai de uma cidade a outra
+            route[0] === currentCity & route[1] === neighborCity |
+            route[1] === currentCity & route[0] === neighborCity
+          )
+          treeGraph.addEdge(temp[0], temp[1], temp[2])
         }
-      }
     }
-    return nodesLen;
-  };
+  }
+  return treeGraph;  
+};
+
+module.exports = BFS;
